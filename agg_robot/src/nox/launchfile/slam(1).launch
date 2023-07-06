@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find nox)/launchfile/nav_init.launch" />
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+   	 <rosparam file="$(find nox)/params/gmapping.yaml" command="load"/>
+    </node>
+    <include file="$(find nox)/launchfile/visualization/visualization_slam.launch" />
+    
+</launch>

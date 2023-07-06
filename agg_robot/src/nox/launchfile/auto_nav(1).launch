@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find nox)/launchfile/nav_init.launch">
+    <arg name="use_autonav" value="true"/>
+   </include> 
+    <node pkg="move_base" type="move_base" name="move_base">
+        <rosparam file="$(find nox)/params/common_costmap_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find nox)/params/common_costmap_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find nox)/params/dwa_local_planner_params.yaml" command="load"/>
+        <rosparam file="$(find nox)/params/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find nox)/params/global_costmap_params.yaml" command="load"/>
+
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+        <param name="controller_patience" value="20"/>
+        <param name="recovery_behavior_enabled" value="true"/>
+        <param name="clearing_rotation_allowed" value="false"/>
+    </node>
+    <include file="$(find nox)/launchfile/visualization/visualization_auto_nav.launch"/>
+</launch>

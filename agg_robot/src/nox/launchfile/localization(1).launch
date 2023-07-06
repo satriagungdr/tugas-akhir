@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="use_global_fusion" default="false"/>
+    
+ <!--  <arg name="map_file" default="$(find nox)/maps/loronglt1A.yaml"/>
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)"/>-->
+    <node pkg="amcl" type="amcl" name="amcl">
+        <rosparam file="$(find nox)/params/amcl_params.yaml" command="load" unless="$(arg use_global_fusion)"/>
+        <rosparam file="$(find nox)/config/amcl_fusion.yaml" command="load" if="$(arg use_global_fusion)" />
+    </node>
+</launch>
